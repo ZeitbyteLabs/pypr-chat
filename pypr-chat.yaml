@@ -3,7 +3,7 @@
 # Scope: brand copy + NodAI/PYPR endpoint (BYO nod_ key) + lean feature subset.
 # Keep this file small and additive — upstream merge friendliness is the priority.
 
-version: 1.0.8
+version: 1.3.13
 cache: true
 
 interface:
