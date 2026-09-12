@@ -1,0 +1,43 @@
+# PYPR Chat — white-label config (M2 patch)
+# Upstream base: LibreChat v0.8.7 (tag), branch pypr-main
+# Scope: brand copy + NodAI/PYPR endpoint (BYO nod_ key) + lean feature subset.
+# Keep this file small and additive — upstream merge friendliness is the priority.
+
+version: 1.0.8
+cache: true
+
+interface:
+  customWelcome: 'Welcome to PYPR — chat with the open AI network.'
+  customFooter: '[PYPR — open AI network](https://pypr.run)'
+  # Privacy/ToS links omitted until pages exist at pypr.run (add interface.privacyPolicy
+  # / interface.termsOfService externalUrl then).
+  presets: false
+  agents:
+    use: false
+    create: false
+    share: false
+    public: false
+  marketplace:
+    use: false
+  prompts:
+    use: true
+    create: false
+    share: false
+    public: false
+  peoplePicker:
+    users: true
+    groups: true
+    roles: false
+
+endpoints:
+  custom:
+    - name: 'PYPR'
+      baseURL: 'https://nodai-main.vercel.app/api/v1'
+      apiKey: 'user_provided'   # BYO nod_... developer key (NodAI dashboard)
+      models:
+        fetch: true             # fetches {baseURL}/models → NodAI /api/v1/models (OpenAI-style, keyed)
+        default:                # fallback list if fetch fails or returns empty
+          - 'Qwen/Qwen2.5-7B-Instruct'
+      modelDisplayLabel: 'PYPR'
+      iconURL: '/assets/pypr-endpoint.svg'
+      titleConvo: false         # no title model calls in v1 (live model names vary on NodAI)
